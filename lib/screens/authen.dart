@@ -7,15 +7,30 @@ class Authen extends StatefulWidget {
 }
 
 class _AuthenState extends State<Authen> {
+  // Explicit
+  double mySize = 180.0;
+
+  // Method
   Widget showLogo() {
-    return Image.asset(
-      'images/logo.png',
-      fit: BoxFit.contain,
+    return Container(
+      width: mySize,
+      height: mySize,
+      child: Image.asset(
+        'images/logo.png',
+        fit: BoxFit.contain,
+      ),
     );
   }
 
   Widget showText() {
-    return Text('Authen');
+    return Text(
+      'Ung SSRU',
+      style: TextStyle(
+        fontSize: 45.0,
+        fontWeight: FontWeight.bold,
+        color: Colors.brown[800],fontFamily: 'PermanentMarker'
+      ),
+    );
   }
 
   @override
