@@ -7,6 +7,7 @@ class Register extends StatefulWidget {
 
 class _RegisterState extends State<Register> {
   // Explicit
+  final formKey = GlobalKey<FormState>();
 
   // Method
   Widget nameText() {
@@ -26,7 +27,7 @@ class _RegisterState extends State<Register> {
   }
 
   Widget emailText() {
-    return TextFormField(
+    return TextFormField(keyboardType: TextInputType.emailAddress,
       decoration: InputDecoration(
         labelText: 'Email :',
         labelStyle: TextStyle(color: Colors.blue),
@@ -60,13 +61,15 @@ class _RegisterState extends State<Register> {
   Widget uploadButton() {
     return IconButton(
       icon: Icon(Icons.cloud_upload),
-      onPressed: () {},
+      onPressed: () {
+        print('Upload');
+      },
     );
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return Scaffold(resizeToAvoidBottomPadding: false,
       appBar: AppBar(
         backgroundColor: Colors.green[800],
         title: Text('Register'),
