@@ -11,6 +11,50 @@ class _AuthenState extends State<Authen> {
   double mySize = 180.0;
 
   // Method
+  Widget singInButton() {
+    return RaisedButton(
+      child: Text('Sign In'), onPressed: (){},
+    );
+  }
+
+  Widget myButton() {
+    return Container(
+      width: 220.0,
+      child: Row(
+        children: <Widget>[
+          singInButton(),
+          singInButton(),
+        ],
+      ),
+    );
+  }
+
+  Widget passwordText() {
+    return Container(
+      width: 220.0,
+      child: TextFormField(
+        obscureText: true,
+        decoration: InputDecoration(
+          labelText: 'Password :',
+          hintText: 'More 6 Charactor',
+        ),
+      ),
+    );
+  }
+
+  Widget emailText() {
+    return Container(
+      width: 220.0,
+      child: TextFormField(
+        keyboardType: TextInputType.emailAddress,
+        decoration: InputDecoration(
+          labelText: 'Email :',
+          hintText: 'you@email.com',
+        ),
+      ),
+    );
+  }
+
   Widget showLogo() {
     return Container(
       width: mySize,
@@ -26,16 +70,17 @@ class _AuthenState extends State<Authen> {
     return Text(
       'Ung SSRU',
       style: TextStyle(
-        fontSize: 45.0,
-        fontWeight: FontWeight.bold,
-        color: Colors.brown[800],fontFamily: 'PermanentMarker'
-      ),
+          fontSize: 45.0,
+          fontWeight: FontWeight.bold,
+          color: Colors.brown[800],
+          fontFamily: 'PermanentMarker'),
     );
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomPadding: false,
       body: Container(
         padding: EdgeInsets.only(top: 60.0),
         alignment: Alignment.topCenter,
@@ -43,6 +88,9 @@ class _AuthenState extends State<Authen> {
           children: <Widget>[
             showLogo(),
             showText(),
+            emailText(),
+            passwordText(),
+            myButton(),
           ],
         ),
       ),
