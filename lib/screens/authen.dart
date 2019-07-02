@@ -11,9 +11,28 @@ class _AuthenState extends State<Authen> {
   double mySize = 180.0;
 
   // Method
+  Widget mySizeBox() {
+    return SizedBox(
+      width: 8.0,
+    );
+  }
+
+  Widget singUpButton() {
+    return RaisedButton(
+      color: Colors.green[300],
+      child: Text('Sign Up'),
+      onPressed: () {},
+    );
+  }
+
   Widget singInButton() {
     return RaisedButton(
-      child: Text('Sign In'), onPressed: (){},
+      color: Colors.green[900],
+      child: Text(
+        'Sign In',
+        style: TextStyle(color: Colors.white),
+      ),
+      onPressed: () {},
     );
   }
 
@@ -22,8 +41,13 @@ class _AuthenState extends State<Authen> {
       width: 220.0,
       child: Row(
         children: <Widget>[
-          singInButton(),
-          singInButton(),
+          Expanded(
+            child: singInButton(),
+          ),
+          mySizeBox(),
+          Expanded(
+            child: singUpButton(),
+          ),
         ],
       ),
     );
@@ -82,6 +106,11 @@ class _AuthenState extends State<Authen> {
     return Scaffold(
       resizeToAvoidBottomPadding: false,
       body: Container(
+        decoration: BoxDecoration(
+            gradient: LinearGradient(
+          colors: [Colors.white, Colors.green[400]],
+          begin: Alignment.topLeft,
+        )),
         padding: EdgeInsets.only(top: 60.0),
         alignment: Alignment.topCenter,
         child: Column(
