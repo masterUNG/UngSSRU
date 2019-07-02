@@ -74,12 +74,18 @@ class _RegisterState extends State<Register> {
       ),
       body: Container(
         decoration: BoxDecoration(
-          image: DecorationImage(image: AssetImage('images/bg.png'), fit: BoxFit.cover),
+          image: DecorationImage(
+              image: AssetImage('images/bg.png'), fit: BoxFit.cover),
         ),
         alignment: Alignment.topCenter,
         padding: EdgeInsets.only(top: 60.0),
         child: Container(
-          width: 250.0,
+          padding: EdgeInsets.all(10.0),
+          decoration: BoxDecoration(
+            color: Color.fromRGBO(255, 255, 255, 0.8),
+          ),
+          width: 300.0,
+          height: 300.0,
           child: Column(
             children: <Widget>[
               nameText(),
