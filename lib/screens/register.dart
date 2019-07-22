@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:ung_ssru/screens/my_service.dart';
 
 class Register extends StatefulWidget {
   @override
@@ -116,17 +117,16 @@ class _RegisterState extends State<Register> {
     });
   }
 
-  Future<void> setUpDisplayName()async{
-
-    await firebaseAuth.currentUser().then((response){
+  Future<void> setUpDisplayName() async {
+    await firebaseAuth.currentUser().then((response) {
       UserUpdateInfo updateInfo = UserUpdateInfo();
       updateInfo.displayName = nameString;
       response.updateProfile(updateInfo);
 
-      
-
+      var serviceRoute =
+          MaterialPageRoute(builder: (BuildContext context) => MyService());
+          Navigator.of(context).pushAndRemoveUntil(serviceRoute, (Route<dynamic> route) => false);
     });
-
   }
 
   void myAlert(String titleString, String messageString) {
@@ -134,7 +134,10 @@ class _RegisterState extends State<Register> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text(titleString, style: TextStyle(color: Colors.red),),
+          title: Text(
+            titleString,
+            style: TextStyle(color: Colors.red),
+          ),
           content: Text(messageString),
           actions: <Widget>[
             FlatButton(
