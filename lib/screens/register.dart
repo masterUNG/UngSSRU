@@ -23,11 +23,13 @@ class _RegisterState extends State<Register> {
           size: 36.0,
           color: Colors.pink[400],
         ),
-      ),validator: (String value){
+      ),
+      validator: (String value) {
         if (value.isEmpty) {
           return 'Please Fill Name in Blank';
         }
-      },onSaved: (String value){
+      },
+      onSaved: (String value) {
         nameString = value;
       },
     );
@@ -46,11 +48,13 @@ class _RegisterState extends State<Register> {
           size: 36.0,
           color: Colors.blue,
         ),
-      ),validator: (String value){
+      ),
+      validator: (String value) {
         if (!((value.contains('@')) && (value.contains('.')))) {
           return 'Type Email Format';
         }
-      },onSaved: (String value){
+      },
+      onSaved: (String value) {
         emailString = value;
       },
     );
@@ -68,11 +72,13 @@ class _RegisterState extends State<Register> {
           size: 36.0,
           color: Colors.green,
         ),
-      ),validator: (String value){
+      ),
+      validator: (String value) {
         if (value.length <= 5) {
           return 'Pass Much More 6 Charactor';
         }
-      },onSaved: (String value){
+      },
+      onSaved: (String value) {
         passwordString = value;
       },
     );
@@ -85,7 +91,8 @@ class _RegisterState extends State<Register> {
         print('Upload');
         if (formKey.currentState.validate()) {
           formKey.currentState.save();
-          print('Name = $nameString, Email = $emailString, Pass = $passwordString');
+          print(
+              'Name = $nameString, Email = $emailString, Pass = $passwordString');
         }
       },
     );
@@ -105,7 +112,9 @@ class _RegisterState extends State<Register> {
         child: Container(
           decoration: BoxDecoration(
             image: DecorationImage(
-                image: AssetImage('images/bg.png'), fit: BoxFit.cover),
+              image: AssetImage('images/bg.png'),
+              fit: BoxFit.cover,
+            ),
           ),
           alignment: Alignment.topCenter,
           padding: EdgeInsets.only(top: 60.0),

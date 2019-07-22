@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "830373912233",
+    "firebase_url": "https://ungssru.firebaseio.com",
+    "project_id": "ungssru",
+    "storage_bucket": "ungssru.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:830373912233:android:07bde3221c030b3c",
+        "android_client_info": {
+          "package_name": "th.in.androidthai.ung_ssru"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "830373912233-unr5s6plmj0p08rvum2er3140u9rnrbs.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyANpqx3TbiKoBF-akRSFnT4gbqehGAsszE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "830373912233-unr5s6plmj0p08rvum2er3140u9rnrbs.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
