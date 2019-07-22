@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class Register extends StatefulWidget {
   @override
@@ -9,6 +10,7 @@ class _RegisterState extends State<Register> {
   // Explicit
   final formKey = GlobalKey<FormState>();
   String nameString, emailString, passwordString;
+  FirebaseAuth firebaseAuth = FirebaseAuth.instance;
 
   // Method
   Widget nameText() {
@@ -93,7 +95,56 @@ class _RegisterState extends State<Register> {
           formKey.currentState.save();
           print(
               'Name = $nameString, Email = $emailString, Pass = $passwordString');
+          register();
         }
+      },
+    );
+  }
+
+  Future<void> register() async {
+    await firebaseAuth
+        .createUserWithEmailAndPassword(
+      email: emailString,
+      password: passwordString,
+    )
+        .then((objResponse) {
+      print('Register Success');
+      setUpDisplayName();
+    }).catchError((objResponse) {
+      print('${objResponse.toString()}');
+      myAlert(objResponse.code.toString(), objResponse.message.toString());
+    });
+  }
+
+  Future<void> setUpDisplayName()async{
+
+    await firebaseAuth.currentUser().then((response){
+      UserUpdateInfo updateInfo = UserUpdateInfo();
+      updateInfo.displayName = nameString;
+      response.updateProfile(updateInfo);
+
+      
+
+    });
+
+  }
+
+  void myAlert(String titleString, String messageString) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text(titleString, style: TextStyle(color: Colors.red),),
+          content: Text(messageString),
+          actions: <Widget>[
+            FlatButton(
+              child: Text('OK'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            )
+          ],
+        );
       },
     );
   }
