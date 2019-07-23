@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class MyService extends StatefulWidget {
   @override
@@ -7,21 +8,51 @@ class MyService extends StatefulWidget {
 
 class _MyServiceState extends State<MyService> {
   // Explicit
+  FirebaseAuth firebaseAuth = FirebaseAuth.instance;
+  String nameString = '';
 
   // Method
+  @override
+  void initState() {
+    super.initState();
+    findDisplayName();
+  }
+
+  Future<void> findDisplayName() async {
+    FirebaseUser firebaseUser = await firebaseAuth.currentUser();
+    setState(() {
+      nameString = firebaseUser.displayName;
+    });
+    print('name = $nameString');
+  }
+
   Widget showDrawerMenu() {
     return Drawer(
       child: ListView(
         children: <Widget>[
           headMenu(),
+          signOutAnExit(),
         ],
       ),
     );
   }
 
+  Widget signOutAnExit() {
+    return ListTile(
+      leading: Icon(Icons.exit_to_app, size: 36.0,color: Colors.red,),
+      title: Text('Sign Out & Exit', style: TextStyle(fontSize: 18.0),),
+    );
+  }
+
   Widget headMenu() {
     return DrawerHeader(
-      decoration: BoxDecoration(),
+      decoration: BoxDecoration(
+        gradient: RadialGradient(
+          colors: [Colors.white, Colors.yellow[900]],
+          radius: 1.5,
+          center: Alignment.center,
+        ),
+      ),
       child: Column(
         children: <Widget>[
           Container(
@@ -35,7 +66,8 @@ class _MyServiceState extends State<MyService> {
               color: Colors.green[800],
               fontSize: 24.0,
             ),
-          ),Text('Login by ...')
+          ),
+          Text('Login by $nameString')
         ],
       ),
     );
