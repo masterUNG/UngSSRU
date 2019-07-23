@@ -10,8 +10,11 @@ class Authen extends StatefulWidget {
 
 class _AuthenState extends State<Authen> {
   // Explicit
-  double mySize = 180.0;
+  double mySize = 140.0;
   FirebaseAuth firebaseAuth = FirebaseAuth.instance;
+  final formKey = GlobalKey<FormState>();
+  String emailString = '', passwordString = '';
+  final scaffoldKey = GlobalKey<ScaffoldState>();
 
   // Method
 
@@ -63,8 +66,25 @@ class _AuthenState extends State<Authen> {
         'Sign In',
         style: TextStyle(color: Colors.white),
       ),
-      onPressed: () {},
+      onPressed: () {
+        formKey.currentState.save();
+        checkAuthen();
+      },
     );
+  }
+
+  Future<void> checkAuthen() async {
+    print('email = $emailString, password = $passwordString');
+    await firebaseAuth
+        .signInWithEmailAndPassword(
+            email: emailString, password: passwordString)
+        .then((response) {
+      print('Authen Success');
+    }).catchError((response) {
+      String errorString = response.message;
+      print('error = $errorString');
+      myShowSnackBar(errorString);
+    });
   }
 
   Widget myButton() {
@@ -93,6 +113,9 @@ class _AuthenState extends State<Authen> {
           labelText: 'Password :',
           hintText: 'More 6 Charactor',
         ),
+        onSaved: (String value) {
+          passwordString = value;
+        },
       ),
     );
   }
@@ -106,6 +129,9 @@ class _AuthenState extends State<Authen> {
           labelText: 'Email :',
           hintText: 'you@email.com',
         ),
+        onSaved: (String value) {
+          emailString = value;
+        },
       ),
     );
   }
@@ -132,9 +158,17 @@ class _AuthenState extends State<Authen> {
     );
   }
 
+  void myShowSnackBar(String messageString) {
+    SnackBar snackBar = SnackBar(
+      content: Text(messageString),
+    );
+    scaffoldKey.currentState.showSnackBar(snackBar);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: scaffoldKey,
       resizeToAvoidBottomPadding: false,
       body: Container(
         decoration: BoxDecoration(
@@ -145,14 +179,17 @@ class _AuthenState extends State<Authen> {
         ),
         padding: EdgeInsets.only(top: 60.0),
         alignment: Alignment.topCenter,
-        child: Column(
-          children: <Widget>[
-            showLogo(),
-            showText(),
-            emailText(),
-            passwordText(),
-            myButton(),
-          ],
+        child: Form(
+          key: formKey,
+          child: Column(
+            children: <Widget>[
+              showLogo(),
+              showText(),
+              emailText(),
+              passwordText(),
+              myButton(),
+            ],
+          ),
         ),
       ),
     );
