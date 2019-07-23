@@ -80,6 +80,7 @@ class _AuthenState extends State<Authen> {
             email: emailString, password: passwordString)
         .then((response) {
       print('Authen Success');
+      moveToService();
     }).catchError((response) {
       String errorString = response.message;
       print('error = $errorString');
@@ -161,6 +162,13 @@ class _AuthenState extends State<Authen> {
   void myShowSnackBar(String messageString) {
     SnackBar snackBar = SnackBar(
       content: Text(messageString),
+      backgroundColor: Colors.green[700],
+      duration: Duration(seconds: 8),
+      action: SnackBarAction(
+        label: 'Close',
+        onPressed: () {},
+        textColor: Colors.orange,
+      ),
     );
     scaffoldKey.currentState.showSnackBar(snackBar);
   }
