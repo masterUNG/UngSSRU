@@ -10,10 +10,12 @@ class _MyServiceState extends State<MyService> {
 
   // Method
   Widget showDrawerMenu() {
-    return ListView(
-      children: <Widget>[
-        headMenu(),
-      ],
+    return Drawer(
+      child: ListView(
+        children: <Widget>[
+          headMenu(),
+        ],
+      ),
     );
   }
 
@@ -23,10 +25,17 @@ class _MyServiceState extends State<MyService> {
       child: Column(
         children: <Widget>[
           Container(
-            width: 100.0,
-            height: 100.0,
+            width: 60.0,
+            height: 60.0,
             child: Image.asset('images/logo.png'),
-          )
+          ),
+          Text(
+            'Ung SSRU',
+            style: TextStyle(
+              color: Colors.green[800],
+              fontSize: 24.0,
+            ),
+          ),Text('Login by ...')
         ],
       ),
     );
