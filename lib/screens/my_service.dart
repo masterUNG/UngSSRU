@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -39,9 +41,26 @@ class _MyServiceState extends State<MyService> {
 
   Widget signOutAnExit() {
     return ListTile(
-      leading: Icon(Icons.exit_to_app, size: 36.0,color: Colors.red,),
-      title: Text('Sign Out & Exit', style: TextStyle(fontSize: 18.0),),
+      leading: Icon(
+        Icons.exit_to_app,
+        size: 36.0,
+        color: Colors.red,
+      ),
+      title: Text(
+        'Sign Out & Exit',
+        style: TextStyle(fontSize: 18.0),
+      ),onTap: (){
+        mySignOut();
+      },
     );
+  }
+
+  Future<void> mySignOut()async{
+
+    await firebaseAuth.signOut().then((response){
+      exit(0);
+    });
+
   }
 
   Widget headMenu() {
