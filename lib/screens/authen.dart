@@ -10,7 +10,7 @@ class Authen extends StatefulWidget {
 
 class _AuthenState extends State<Authen> {
   // Explicit
-  double mySize = 140.0;
+  double mySize = 100.0;
   FirebaseAuth firebaseAuth = FirebaseAuth.instance;
   final formKey = GlobalKey<FormState>();
   String emailString = '', passwordString = '';
@@ -177,7 +177,7 @@ class _AuthenState extends State<Authen> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: scaffoldKey,
-      resizeToAvoidBottomPadding: false,
+      resizeToAvoidBottomPadding: true,
       body: Container(
         decoration: BoxDecoration(
           gradient: LinearGradient(
@@ -185,11 +185,10 @@ class _AuthenState extends State<Authen> {
             begin: Alignment.topLeft,
           ),
         ),
-        padding: EdgeInsets.only(top: 60.0),
         alignment: Alignment.topCenter,
         child: Form(
           key: formKey,
-          child: Column(
+          child: Column(mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               showLogo(),
               showText(),
