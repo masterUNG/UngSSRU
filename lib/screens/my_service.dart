@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:ung_ssru/screens/my_map.dart';
+import 'package:ung_ssru/screens/show_product.dart';
 
 class MyService extends StatefulWidget {
   @override
@@ -13,8 +14,51 @@ class _MyServiceState extends State<MyService> {
   // Explicit
   FirebaseAuth firebaseAuth = FirebaseAuth.instance;
   String nameString = '';
+  Widget myWidget = ShowProduct();
 
   // Method
+  Widget menuShowInfo() {
+    return ListTile(
+      leading: Icon(
+        Icons.account_box,
+        size: 36.0,
+        color: Colors.orange,
+      ),
+      title: Text(
+        'Show Info',
+        style: TextStyle(fontSize: 18.0),
+      ),
+    );
+  }
+
+  Widget menuShowMap() {
+    return ListTile(
+      leading: Icon(
+        Icons.map,
+        size: 36.0,
+        color: Colors.blue,
+      ),
+      title: Text(
+        'Show Map',
+        style: TextStyle(fontSize: 18.0),
+      ),
+    );
+  }
+
+  Widget menuShowProduct() {
+    return ListTile(
+      leading: Icon(
+        Icons.face,
+        size: 36.0,
+        color: Colors.green,
+      ),
+      title: Text(
+        'Show Product',
+        style: TextStyle(fontSize: 18.0),
+      ),
+    );
+  }
+
   @override
   void initState() {
     super.initState();
@@ -34,6 +78,9 @@ class _MyServiceState extends State<MyService> {
       child: ListView(
         children: <Widget>[
           headMenu(),
+          menuShowProduct(),
+          menuShowMap(),
+          menuShowInfo(),
           signOutAnExit(),
         ],
       ),
@@ -50,18 +97,17 @@ class _MyServiceState extends State<MyService> {
       title: Text(
         'Sign Out & Exit',
         style: TextStyle(fontSize: 18.0),
-      ),onTap: (){
+      ),
+      onTap: () {
         mySignOut();
       },
     );
   }
 
-  Future<void> mySignOut()async{
-
-    await firebaseAuth.signOut().then((response){
+  Future<void> mySignOut() async {
+    await firebaseAuth.signOut().then((response) {
       exit(0);
     });
-
   }
 
   Widget headMenu() {
@@ -99,7 +145,7 @@ class _MyServiceState extends State<MyService> {
       appBar: AppBar(
         title: Text('My Service'),
       ),
-      body: MyMap(),
+      body: myWidget,
       drawer: showDrawerMenu(),
     );
   }
