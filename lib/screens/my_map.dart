@@ -15,11 +15,22 @@ class _MyMapState extends State<MyMap> {
   );
 
   // Method
+
+  Set<Marker> myMarker() {
+    return <Marker>[
+      Marker(
+        position: ssruLatLng,
+        markerId: MarkerId('idSSRU'),
+      ),
+    ].toSet();
+  }
+
   Widget showMap() {
     return GoogleMap(
       mapType: MapType.normal,
       initialCameraPosition: cameraPosition,
       onMapCreated: (GoogleMapController googleMapController) {},
+      markers: myMarker(),
     );
   }
 
