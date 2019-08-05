@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:ung_ssru/screens/my_map.dart';
+import 'package:ung_ssru/screens/show_info.dart';
 import 'package:ung_ssru/screens/show_product.dart';
 
 class MyService extends StatefulWidget {
@@ -17,6 +18,13 @@ class _MyServiceState extends State<MyService> {
   Widget myWidget = ShowProduct();
 
   // Method
+  Widget myDivider() {
+    return Divider(
+      height: 5.0,
+      color: Colors.blue[800],
+    );
+  }
+
   Widget menuShowInfo() {
     return ListTile(
       leading: Icon(
@@ -27,7 +35,12 @@ class _MyServiceState extends State<MyService> {
       title: Text(
         'Show Info',
         style: TextStyle(fontSize: 18.0),
-      ),
+      ),onTap: (){
+        setState(() {
+          myWidget = ShowInfo();
+          Navigator.of(context).pop();
+        });
+      },
     );
   }
 
@@ -41,7 +54,12 @@ class _MyServiceState extends State<MyService> {
       title: Text(
         'Show Map',
         style: TextStyle(fontSize: 18.0),
-      ),
+      ),onTap: (){
+        setState(() {
+          myWidget = MyMap();
+          Navigator.of(context).pop();
+        });
+      },
     );
   }
 
@@ -55,7 +73,12 @@ class _MyServiceState extends State<MyService> {
       title: Text(
         'Show Product',
         style: TextStyle(fontSize: 18.0),
-      ),
+      ),onTap: (){
+        setState(() {
+          myWidget = ShowProduct();
+          Navigator.of(context).pop();
+        });
+      },
     );
   }
 
@@ -79,8 +102,11 @@ class _MyServiceState extends State<MyService> {
         children: <Widget>[
           headMenu(),
           menuShowProduct(),
+          myDivider(),
           menuShowMap(),
+          myDivider(),
           menuShowInfo(),
+          myDivider(),
           signOutAnExit(),
         ],
       ),
