@@ -32,7 +32,7 @@ class _ShowProductState extends State<ShowProduct> {
         String nameProduct = snapshot.data['Name'];
         print('nameProduct = $nameProduct');
 
-        String detailProduct = snapshot.data['Detial'];
+        String detailProduct = snapshot.data['Detail'];
         String urlProduct = snapshot.data['Url'];
 
         ProductModel productModel =
@@ -45,12 +45,67 @@ class _ShowProductState extends State<ShowProduct> {
     });
   }
 
+  Widget showImage(int index) {
+    return Container(
+      margin: EdgeInsets.all(5.0),
+      decoration: BoxDecoration(
+          border: Border.all(), borderRadius: BorderRadius.circular(30.0)),
+      width: 150.0,
+      height: 100.0,
+      child: Image.network(
+        productModels[index].url,
+        fit: BoxFit.contain,
+      ),
+    );
+  }
+
+  Widget showText(int index) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: <Widget>[
+        showName(index),
+        showDetailShort(index),
+      ],
+    );
+  }
+
+  Widget showName(int index) {
+    return Text(
+      productModels[index].name,
+      style: TextStyle(fontSize: 24.0),
+    );
+  }
+
+  Widget showDetailShort(int index) {
+    String detailShort = (productModels[index].detail).substring(1, 70);
+    return Container(
+        width: 180.0,
+        child: Text(
+          '$detailShort ...',
+        ));
+  }
+
   Widget showListProduct() {
-    return ListView.builder(
-      itemCount: productModels.length,
-      itemBuilder: (BuildContext context, int index) {
-        return Text(productModels[index].name);
-      },
+    return Container(
+      child: ListView.builder(
+        itemCount: productModels.length,
+        itemBuilder: (BuildContext context, int index) {
+          return Container(decoration: index % 2 == 0 
+          ? BoxDecoration(color: Colors.blue[50])
+          : BoxDecoration(color: Colors.blue[200]),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: <Widget>[
+                showImage(index),
+                SizedBox(
+                  width: 8.0,
+                ),
+                showText(index),
+              ],
+            ),
+          );
+        },
+      ),
     );
   }
 
