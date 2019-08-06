@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:ung_ssru/screens/my_map.dart';
+import 'package:ung_ssru/screens/qr_reader.dart';
 import 'package:ung_ssru/screens/show_info.dart';
 import 'package:ung_ssru/screens/show_product.dart';
 
@@ -25,6 +26,25 @@ class _MyServiceState extends State<MyService> {
     );
   }
 
+  Widget menuQRcode() {
+    return ListTile(
+      leading: Icon(
+        Icons.android,
+        size: 36.0,
+        color: Colors.purple,
+      ),
+      title: Text(
+        'QR code Reader',
+        style: TextStyle(fontSize: 18.0),
+      ),onTap: (){
+        setState(() {
+          myWidget = QRreader();
+          Navigator.of(context).pop();
+        });
+      },
+    );
+  }
+
   Widget menuShowInfo() {
     return ListTile(
       leading: Icon(
@@ -35,7 +55,8 @@ class _MyServiceState extends State<MyService> {
       title: Text(
         'Show Info',
         style: TextStyle(fontSize: 18.0),
-      ),onTap: (){
+      ),
+      onTap: () {
         setState(() {
           myWidget = ShowInfo();
           Navigator.of(context).pop();
@@ -54,7 +75,8 @@ class _MyServiceState extends State<MyService> {
       title: Text(
         'Show Map',
         style: TextStyle(fontSize: 18.0),
-      ),onTap: (){
+      ),
+      onTap: () {
         setState(() {
           myWidget = MyMap();
           Navigator.of(context).pop();
@@ -73,7 +95,8 @@ class _MyServiceState extends State<MyService> {
       title: Text(
         'Show Product',
         style: TextStyle(fontSize: 18.0),
-      ),onTap: (){
+      ),
+      onTap: () {
         setState(() {
           myWidget = ShowProduct();
           Navigator.of(context).pop();
@@ -106,6 +129,8 @@ class _MyServiceState extends State<MyService> {
           menuShowMap(),
           myDivider(),
           menuShowInfo(),
+          myDivider(),
+          menuQRcode(),
           myDivider(),
           signOutAnExit(),
         ],
