@@ -45,9 +45,15 @@ class _AuthenState extends State<Authen> {
   }
 
   Widget singUpButton() {
-    return RaisedButton(
-      color: Colors.green[300],
-      child: Text('Sign Up'),
+    return OutlineButton(
+      borderSide: BorderSide(color: Colors.green.shade900),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(30.0),
+      ),
+      child: Text(
+        'Sign Up',
+        style: TextStyle(color: Colors.green.shade900),
+      ),
       onPressed: () {
         print('You Click SingUp');
 
@@ -61,6 +67,9 @@ class _AuthenState extends State<Authen> {
 
   Widget singInButton() {
     return RaisedButton(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(30.0),
+      ),
       color: Colors.green[900],
       child: Text(
         'Sign In',
@@ -178,24 +187,27 @@ class _AuthenState extends State<Authen> {
     return Scaffold(
       key: scaffoldKey,
       resizeToAvoidBottomPadding: true,
-      body: Container(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            colors: [Colors.white, Colors.green[400]],
-            begin: Alignment.topLeft,
+      body: Center(
+        child: Container(
+          decoration: BoxDecoration(
+            gradient: RadialGradient(
+              colors: [Colors.white, Colors.green.shade900],
+              radius: 1.2,
+            ),
           ),
-        ),
-        alignment: Alignment.topCenter,
-        child: Form(
-          key: formKey,
-          child: Column(mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              showLogo(),
-              showText(),
-              emailText(),
-              passwordText(),
-              myButton(),
-            ],
+          alignment: Alignment.center,
+          child: Form(
+            key: formKey,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                showLogo(),
+                showText(),
+                emailText(),
+                passwordText(),
+                myButton(),
+              ],
+            ),
           ),
         ),
       ),
